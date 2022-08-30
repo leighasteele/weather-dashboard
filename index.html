@@ -26,6 +26,7 @@
             <button id="search" type="submit" class="btn btn-primary mb-4">
               Search
             </button>
+            <div id="searchedCities"></div>
           </form>
         </div>
         <div class="col-12 col-md-9">
@@ -52,6 +53,7 @@
     </main>
     <script>
       var searchForm = document.querySelector("#searchForm");
+      var searchedCities = document.querySelector("#searchedCities");
       var searchEl = document.querySelector("#search");
       var appid = "485bbc753e29e9770f09ca55c32c6d79";
 
@@ -72,11 +74,12 @@
 
       var displayButtons = function () {
         var cities = JSON.parse(localStorage.getItem("cities")) || [];
+        searchedCities.innerHTML = null;
         for (var city of cities) {
           var buttonEl = document.createElement("button");
           buttonEl.textContent = city;
           buttonEl.className = "btn btn-success mb-4";
-          searchForm.appendChild(buttonEl);
+          searchedCities.appendChild(buttonEl);
         }
       };
 
@@ -91,6 +94,7 @@
         cities.push(city);
         var data = JSON.stringify(cities);
         localStorage.setItem("cities", data);
+        displayButtons();
       };
 
       var getGEO = function (locations) {
