@@ -77,24 +77,32 @@
         fetch(oneCall).then(toJSON).then(displayWeather);
       };
 
+      var localStorageSave = function (city) {
+        var cities = JSON.parse(localStorage.getItem("cities")) || [];
+        cities.push(city);
+        var data = JSON.stringify(cities);
+        localStorage.setItem("cities", data);
+      };
+
       var getGEO = function (locations) {
         var city = locations[0];
         console.log("LAT", city.lat);
         console.log("LON", city.lon);
+        localStorageSave(city.name);
 
         getOneCall(city);
       };
 
-      var handleSearch = function(event) {
+
+
+      var handleSearch = function (event) {
         event.preventDefault();
 
-      var q = document.querySelector("#q");
-      var geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${q.value}&appid=${appid}`;
+        var q = document.querySelector("#q");
+        var geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${q.value}&appid=${appid}`;
 
-      fetch(geoURL)
-      .then(toJSON)
-      .then(getGEO);
-      }
+        fetch(geoURL).then(toJSON).then(getGEO);
+      };
       searchEl.addEventListener("click", handleSearch);
     </script>
   </body>
