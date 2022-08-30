@@ -22,8 +22,10 @@
       <section class="row">
         <div class="col-12 col-md-3">
           <form class="card p-4 m-4">
-            <input class="form control mb-4" />
-            <button type="submit" class="btn btn-primary mb-4">Search</button>
+            <input id="q" class="form control mb-4" />
+            <button id="search" type="submit" class="btn btn-primary mb-4">
+              Search
+            </button>
           </form>
         </div>
         <div class="col-12 col-md-9">
@@ -49,6 +51,7 @@
       </section>
     </main>
     <script>
+      var searchEl = document.querySelector("#search");
       var appid = "485bbc753e29e9770f09ca55c32c6d79";
       var q = "Chicago";
       var geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${appid}`;
@@ -82,7 +85,17 @@
         getOneCall(city);
       };
 
-      fetch(geoURL).then(toJSON).then(getGEO);
+      var handleSearch = function(event) {
+        event.preventDefault();
+
+      var q = document.querySelector("#q");
+      var geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${q.value}&appid=${appid}`;
+
+      fetch(geoURL)
+      .then(toJSON)
+      .then(getGEO);
+      }
+      searchEl.addEventListener("click", handleSearch);
     </script>
   </body>
 </html>
