@@ -8,7 +8,7 @@ var toJSON = function (response) {
   return response.json();
 };
 
-var displayWeather = function (data,city) {
+var displayWeather = function (data, city) {
   console.log(data);
   var currentEl = document.querySelector("#current");
   var h2El = document.createElement("h2");
@@ -37,14 +37,14 @@ var displayWeather = function (data,city) {
     colEl.className = "col-12 col-md";
     cardEl.className = "card p-3 m-3";
 
-      dateEl.textContent = date;
-      tempEl.textContent = temp;
-      uviEl.textContent = uvi;
+    dateEl.textContent = date;
+    tempEl.textContent = temp;
+    uviEl.textContent = uvi;
 
-      imgEl.width = 90;
-      imgEl.height = 90;
-      imgEl.alt = icon;
-      imgEl.src = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+    imgEl.width = 90;
+    imgEl.height = 90;
+    imgEl.alt = icon;
+    imgEl.src = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
 
     fiveDayEl.append(colEl);
     colEl.append(cardEl);
@@ -69,7 +69,9 @@ var displayButtons = function () {
 var getOneCall = function (city) {
   var oneCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${city.lat}&lon=${city.lon}&appid=${appid}&units=imperial&exclude=hourly,minutely`;
 
-  fetch(oneCall).then(toJSON).then((data)=>displayWeather(data, city));
+  fetch(oneCall)
+    .then(toJSON)
+    .then((data) => displayWeather(data, city));
 };
 
 var localStorageSave = function (city) {
@@ -94,7 +96,7 @@ var handleSearch = function (event) {
   event.preventDefault();
 
   var q = document.querySelector("#q");
-  var geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${q.value}&appid=${appid}`;
+  var geoURL = `https://api.openweathermap.org/geo/1.0/direct?q=${q.value}&appid=${appid}`;
 
   fetch(geoURL).then(toJSON).then(getGEO);
 };
@@ -103,7 +105,7 @@ var handleCity = function (event) {
   event.preventDefault();
   if (event.target.matches("button")) {
     var q = event.target.textContent;
-    var geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${appid}`;
+    var geoURL = `https://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${appid}`;
 
     fetch(geoURL).then(toJSON).then(getGEO);
   }
