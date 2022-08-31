@@ -44,7 +44,7 @@ var displayWeather = function (data, city) {
     imgEl.width = 90;
     imgEl.height = 90;
     imgEl.alt = icon;
-    imgEl.src = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
+    imgEl.src = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
 
     fiveDayEl.append(colEl);
     colEl.append(cardEl);
@@ -105,7 +105,7 @@ var handleCity = function (event) {
   event.preventDefault();
   if (event.target.matches("button")) {
     var q = event.target.textContent;
-    var geoURL = `https://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${appid}`;
+    var geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${appid}`;
 
     fetch(geoURL).then(toJSON).then(getGEO);
   }
