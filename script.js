@@ -105,7 +105,7 @@ var handleCity = function (event) {
   event.preventDefault();
   if (event.target.matches("button")) {
     var q = event.target.textContent;
-    var geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${appid}`;
+    var geoURL = `https://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${appid}`;
 
     fetch(geoURL).then(toJSON).then(getGEO);
   }
