@@ -1,6 +1,7 @@
 var searchForm = document.querySelector("#searchForm");
 var searchedCities = document.querySelector("#searchedCities");
 var searchEl = document.querySelector("#search");
+var fiveDayEl = document.querySelector("#fiveDays");
 var appid = "485bbc753e29e9770f09ca55c32c6d79";
 
 var toJSON = function (response) {
@@ -9,7 +10,6 @@ var toJSON = function (response) {
 
 var displayWeather = function (data,city) {
   console.log(data);
-  var fiveDayEl = document.querySelector("#fiveDay");
   var currentEl = document.querySelector("#current");
   var h2El = document.createElement("h2");
   var tempEl = document.createElement("p");
@@ -69,7 +69,7 @@ var displayButtons = function () {
 var getOneCall = function (city) {
   var oneCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${city.lat}&lon=${city.lon}&appid=${appid}&units=imperial&exclude=hourly,minutely`;
 
-  fetch(oneCall).then(toJSON).then(displayWeather);
+  fetch(oneCall).then(toJSON).then((data)=>displayWeather(data, city));
 };
 
 var localStorageSave = function (city) {
