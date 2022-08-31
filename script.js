@@ -96,7 +96,7 @@ var handleSearch = function (event) {
   event.preventDefault();
 
   var q = document.querySelector("#q");
-  var geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${q.value}&appid=${appid}`;
+  var geoURL = `https://api.openweathermap.org/geo/1.0/direct?q=${q.value}&appid=${appid}`;
 
   fetch(geoURL).then(toJSON).then(getGEO);
 };
